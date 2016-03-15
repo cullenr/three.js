@@ -31,12 +31,18 @@ THREE.Points.prototype.raycast = ( function () {
 
 		// Checking boundingSphere distance to ray
 
-		if ( geometry.boundingSphere === null ) geometry.computeBoundingSphere();
-
-		sphere.copy( geometry.boundingSphere );
-		sphere.applyMatrix4( matrixWorld );
-
-		if ( raycaster.ray.intersectsSphere( sphere ) === false ) return;
+		if(geometry.attributes.position.array.length > 3) {
+		
+		        if ( geometry.boundingSphere === null && 
+		             geometry.attributes.position.array.length > 3) {
+		            geometry.computeBoundingSphere();
+		        }
+		
+		        sphere.copy( geometry.boundingSphere );
+		        sphere.applyMatrix4( matrixWorld );
+		
+		        if ( raycaster.ray.intersectsSphere( sphere ) === false ) return;
+		}
 
 		//
 
